@@ -18,8 +18,10 @@ class UssdController extends Controller
 	    ->setInitialState(Welcome::class)
 	    ->setResponse(function(string $message, string $action) {
 		    return [
-				'Type' => $action === 2 ? 'Release' : 'Response',
-				'Message' => $message
+				'Mobile' => request('Mobile'),
+                'SessionId' => request('SessionId'),
+                'Message' => $message,
+                'Type' => $action === 'prompt' ? 'Release' : 'Response'
 		    ];
 		});
 
